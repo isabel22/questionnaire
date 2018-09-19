@@ -15,6 +15,14 @@
         <td><%= link_to 'Show', document %></td>
         <td><%= link_to 'Edit', edit_document_path(document) %></td>
         <td><%= link_to 'Questions', document_questions_path(document) %></td>
+        <% if current_user.already_answered_document?(document.id.to_s) %>
+          <td><%= link_to 'Show my Answer', document_show_answer_path(document) %></td>
+        <% elsif document.questions.present? %>
+          <td><%= link_to 'Answer', document_answer_path(document) %></td>
+        <% end %>
+        <% if document.has_answers? %>
+          <td><%= link_to 'Show all Answer', document_show_answers_path(document) %></td>
+        <% end %>
         <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

@@ -33,4 +33,15 @@ class User
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
+
+  field :completed_document_ids, type: Array, default: []
+
+  def self.have_answered_for_document(document)
+    question_ids = Question.where(document_id: document.id).map(:id)
+    Answer.in(question_id: question_ids).map(:user_id).uniq
+  end
+
+  def already_answered_document?(document_id)
+    completed_document_ids.include?(document_id)
+  end
 end

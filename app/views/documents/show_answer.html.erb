@@ -1,0 +1,13 @@
+<p>
+  <h1><%= @document.title %></h1>
+
+  <% @questions.each do |question| %>
+    <strong>Question: </strong>
+    <%= question.body %><br>
+    <strong>Answer: </strong>
+    <% answer = Answer.where(user_id: @user_id, question_id: question.id).first %>
+    <%= answer.body %><br><br>
+  <% end %>
+</p>
+
+<%= link_to 'Back', documents_path %>

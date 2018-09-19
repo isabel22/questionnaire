@@ -1,0 +1,10 @@
+<p>
+  <h1><%= @document.title %></h1>
+
+  <% @users.each do |user| %>
+    <strong><%= user.email %> </strong> |
+    <%= link_to 'Show Answer', document_show_answer_path(@document, user_id: user.id) %><br>
+  <% end %>
+</p>
+
+<%= link_to 'Back', documents_path %>

@@ -62,6 +62,34 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def answer
+    @document = Document.find(params[:document_id])
+    @questions = Question.where(document_id: @document.id)
+  end
+
+  def create_answer
+    @document = Document.find(params[:document_id])
+    @questions = Question.where(document_id: @document.id)
+    params[:answer].each do |question_id, answer|
+      question = Question.find(question_id)
+      Answer.create(question_id: question.id, body: answer, user_id: current_user.id)
+    end
+    current_user.push(completed_document_ids: @document.id.to_s)
+    redirect_to document_show_answer_path(@document)
+  end
+
+  def show_answer
+    @user_id = params[:user_id].present? ? params[:user_id] : current_user.id
+    @document = Document.find(params[:document_id])
+    @questions = Question.where(document_id: @document.id)
+  end
+
+  def show_answers
+    @document = Document.find(params[:document_id])
+    user_ids = User.have_answered_for_document(@document)
+    @users = User.in(id: user_ids)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_document

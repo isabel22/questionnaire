@@ -1,0 +1,22 @@
+<p>
+  <strong>Title:</strong>
+  <%= @document.title %>
+
+  <% if @questions.present? %>
+    <br><strong>Questions:</strong>
+    <br><br>
+    <%= form_for :answer, url: document_create_answer_path do |form| %>
+      <% @questions.each do |question| %>
+        <strong><%= question.body %></strong><br>
+        <%= form.text_field question.id %><br><br>
+      <% end %>
+
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
+    <br>
+  <% end %>
+</p>
+
+<%= link_to 'Back', documents_path %>
