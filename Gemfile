@@ -58,3 +58,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'mongoid', '~> 7.0'
 gem 'bson_ext'
+
+gem "react_on_rails", " ~> 11.1.0"
+gem "webpacker", "~> 3"
