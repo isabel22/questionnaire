@@ -1,5 +1,6 @@
 <h1>New Question</h1>
 
-<%= render 'form', question: @question %>
-
-<%= link_to 'Back', questions_path %>
+<%= form_with(model: @question, url: document_questions_path, local: true) do |form| %>
+  <%= render 'form', question: @question, form: form %>
+<% end %>
+<%= link_to 'Back', document_questions_path %>

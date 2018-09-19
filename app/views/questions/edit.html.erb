@@ -1,6 +1,8 @@
 <h1>Editing Question</h1>
 
-<%= render 'form', question: @question %>
+<%= form_with(model: @question, url: document_question_path(@document, @question), local: true) do |form| %>
+  <%= render 'form', document: @document, question: @question, form: form %>
+<% end %>
 
-<%= link_to 'Show', @question %> |
-<%= link_to 'Back', questions_path %>
+<%= link_to 'Show', document_question_path(id: @question.id) %> |
+<%= link_to 'Back', document_questions_path %>

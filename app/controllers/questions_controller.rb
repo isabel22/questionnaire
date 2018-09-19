@@ -1,10 +1,11 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_document, only: [:index, :show, :create, :destroy, :update, :edit]
+  before_action :set_question, only: [:show, :destroy, :update, :edit]
 
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = Question.where(document_id: @document.id)
   end
 
   # GET /questions/1
@@ -24,11 +25,11 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
-    @question = Question.new(question_params)
+    @question = Question.new(question_params.merge(document_id: @document.id))
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        format.html { redirect_to document_questions_path, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new }
@@ -42,7 +43,8 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+        puts "pasa por aqui..."
+        format.html { redirect_to document_questions_path, notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
+      format.html { redirect_to document_questions_path, notice: 'Question was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -70,5 +72,9 @@ class QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:body)
+    end
+
+    def set_document
+      @document = Document.find(params[:document_id])
     end
 end
