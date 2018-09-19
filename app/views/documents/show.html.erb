@@ -3,6 +3,15 @@
 <p>
   <strong>Title:</strong>
   <%= @document.title %>
+
+  <% if @questions.present? %>
+    <br><strong>Questions:</strong>
+    <ul>
+      <% @questions.each do |question| %>
+        <li><%= question.body %></li>
+      <% end %>
+    </ul>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_document_path(@document) %> |
