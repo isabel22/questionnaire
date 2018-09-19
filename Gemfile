@@ -61,3 +61,5 @@ gem 'bson_ext'
 
 gem "react_on_rails", " ~> 11.1.0"
 gem "webpacker", "~> 3"
+
+gem 'devise'
