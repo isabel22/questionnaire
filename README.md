@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project allows you to create a document with a title and as many questions as you want. When the document has at least one question, you will be able to answer the document.
 
-Things you may want to cover:
+## Requirements
+- MongoDB
 
-* Ruby version
+## Deployment instructions
 
-* System dependencies
+- sudo mongod
+- bundle install
+- bundle exec rails s
+- Visit localhost:3000
 
-* Configuration
+## Pending
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Use react for searches
+- Specs
